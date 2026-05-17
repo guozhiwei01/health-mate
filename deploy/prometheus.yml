@@ -1,0 +1,26 @@
+# Prometheus 配置 - 抓取 Java + Python 指标
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Java Core (Spring Boot Actuator)
+  - job_name: 'healthmate-core'
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['host.docker.internal:8081']
+        labels:
+          service: 'java-core'
+
+  # Python AI Engine
+  - job_name: 'medmate-ai-engine'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['host.docker.internal:8090']
+        labels:
+          service: 'ai-engine'
+
+  # Prometheus 自身
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

@@ -1,6 +1,7 @@
 package com.healthmate.controller;
 
 import com.healthmate.client.AiEngineClient;
+import com.healthmate.config.BusinessMetrics;
 import com.healthmate.entity.Conversation;
 import com.healthmate.entity.Message;
 import com.healthmate.security.Audited;
@@ -33,6 +34,7 @@ public class ChatController {
 
     private final ChatService chatService;
     private final AiEngineClient aiEngineClient;
+    private final BusinessMetrics metrics;
 
     /**
      * 同步对话
@@ -63,6 +65,10 @@ public class ChatController {
                 aiResp.getResponse(), aiResp.getIntent(),
                 aiResp.getModel(), latencyMs
         );
+
+        // Prometheus 业务指标埋点
+        metrics.incrementChat(aiResp.getIntent());
+        metrics.getChatLatency().record(java.time.Duration.ofMillis(latencyMs));
 
         return ResponseEntity.ok(Map.of(
                 "conversationId", convId,

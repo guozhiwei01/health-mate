@@ -86,6 +86,51 @@ async def health_check():
     }
 
 
+# ==================== Prometheus Metrics ====================
+
+# Simple in-memory counters (production: use prometheus_client library)
+_metrics = {
+    "inference_total": 0,
+    "inference_errors": 0,
+    "intent_classify_total": 0,
+    "rag_hit_total": 0,
+    "rag_miss_total": 0,
+    "safety_trigger_total": 0,
+    "emergency_total": 0,
+}
+_latencies: list[float] = []
+
+
+def record_inference(latency_s: float, intent: str = "", rag_hit: bool = False):
+    """Record inference metrics (called from chat endpoints)"""
+    _metrics["inference_total"] += 1
+    _latencies.append(latency_s)
+    if len(_latencies) > 1000:
+        _latencies.pop(0)
+    if rag_hit:
+        _metrics["rag_hit_total"] += 1
+    else:
+        _metrics["rag_miss_total"] += 1
+
+
+@app.get("/metrics", tags=["System"])
+async def prometheus_metrics():
+    """Prometheus-compatible metrics endpoint"""
+    lines = []
+    for k, v in _metrics.items():
+        lines.append(f"healthmate_ai_{k} {v}")
+
+    # Latency percentiles
+    if _latencies:
+        sorted_lat = sorted(_latencies)
+        n = len(sorted_lat)
+        lines.append(f"healthmate_ai_inference_p50 {sorted_lat[int(n*0.5)]:.3f}")
+        lines.append(f"healthmate_ai_inference_p95 {sorted_lat[int(n*0.95)]:.3f}")
+        lines.append(f"healthmate_ai_inference_p99 {sorted_lat[min(int(n*0.99), n-1)]:.3f}")
+
+    return "\n".join(lines) + "\n"
+
+
 # ==================== Core API ====================
 
 @app.post("/api/intent/classify", tags=["AI Core"])
