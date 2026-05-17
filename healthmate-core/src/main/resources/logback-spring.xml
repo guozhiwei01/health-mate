@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- PII 脱敏 Converter -->
+    <conversionRule conversionWord="piiMsg"
+                    converterClass="com.healthmate.security.PiiPatternConverter"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- 用 %piiMsg 替代 %msg，自动脱敏 -->
+            <pattern>%d{HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %piiMsg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="com.healthmate" level="DEBUG"/>
+    <logger name="com.healthmate.security" level="INFO"/>
+</configuration>
