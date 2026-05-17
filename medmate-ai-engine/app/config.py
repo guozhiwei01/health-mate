@@ -55,7 +55,7 @@ class Settings(BaseSettings):
 
     # --- 模型路径（本地微调用） ---
     intent_model_path: str = "D:/models/Qwen2.5-0.5B-Instruct"
-    intent_lora_path: str = ""
+    intent_lora_path: str = "D:/project/health-mate/medmate-ai-engine/training/saves/intent-classifier"
     medical_model_path: str = "D:/models/Qwen2.5-7B"
     medical_lora_path: str = ""
     embedding_model_path: str = "C:/Users/13203/.cache/huggingface/hub/models--BAAI--bge-m3"

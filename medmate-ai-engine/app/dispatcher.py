@@ -1,68 +1,61 @@
 """
-HealthMate AI Engine - 调度核心
-四条路径：紧急处理 / 报告管线 / Agent 工具 / 快速&深度通道
+模型调度器 - 四条路径路由
+根据意图分类结果 + 置信度 + 对话轮数，决定走哪条路径
+
+路径说明：
+1. model_fast       - 快速通道（闲聊/健康问答）
+2. model_med        - 深度通道（症状咨询/用药咨询）
+3. report_pipeline  - 报告解读管线
+4. agent_executor   - Agent 工具调用
+5. emergency_handler - 紧急情况处理
 """
-from app.intent.schemas import IntentResult
+from app.intent.schemas import IntentResult, IntentType, INTENT_ROUTE_MAP
+
+# 低置信度阈值：低于此值升级到深度通道
+LOW_CONFIDENCE_THRESHOLD = 0.7
+
+# 多轮升级阈值：超过此轮数，快速通道升级为深度通道
+ESCALATION_TURN_COUNT = 3
 
 
-# 意图优先级（数字越小优先级越高）
-INTENT_PRIORITY = {
-    "emergency": 0,
-    "symptom_consult": 1,
-    "drug_consult": 2,
-    "report_parse": 3,
-    "task_command": 4,
-    "health_qa": 5,
-    "casual_chat": 6,
-}
-
-
-def resolve_intent(result: IntentResult) -> str:
+def route(intent_result: IntentResult, turn_count: int = 0) -> str:
     """
-    混合意图处理：取医疗优先级更高的意图
-    例如 "我头疼，能吃布洛芬吗" → symptom_consult + drug_consult → 取 symptom_consult
-    """
-    if result.secondary_intent and result.secondary_confidence > 0.4:
-        return min(
-            [result.primary_intent, result.secondary_intent],
-            key=lambda x: INTENT_PRIORITY.get(x, 99),
-        )
-    return result.primary_intent
+    根据意图分类结果决定路由路径
 
-
-def route(intent: str, confidence: float, turn_count: int) -> str:
-    """
-    模型调度器：根据意图 + 置信度 + 对话轮数，选择执行路径
+    Args:
+        intent_result: 意图分类结果
+        turn_count: 当前对话轮数
 
     Returns:
-        "emergency_handler"  - 紧急处理（最高优先级）
-        "report_pipeline"    - 独立报告管线
-        "agent_executor"     - Agent 工具调用
-        "model_fast"         - 快速通道（轻量模型）
-        "model_med"          - 深度通道（医疗微调模型）
+        路由路径标识 (model_fast / model_med / report_pipeline / agent_executor / emergency_handler)
     """
-    # 路径 1：紧急处理
-    if intent == "emergency":
+    intent = intent_result.primary_intent
+    confidence = intent_result.primary_confidence
+
+    # 紧急情况始终最高优先级
+    if intent == IntentType.EMERGENCY:
         return "emergency_handler"
 
-    # 路径 2：报告解读（独立管线，不走快速/深度通道）
-    if intent == "report_parse":
+    # 报告解读走独立管线
+    if intent == IntentType.REPORT_PARSE:
         return "report_pipeline"
 
-    # 路径 3：Agent 工具调用
-    if intent == "task_command":
+    # 任务指令走 Agent
+    if intent == IntentType.TASK_COMMAND:
         return "agent_executor"
 
-    # 路径 4A：快速通道
-    if intent in ["casual_chat", "health_qa"] and confidence > 0.85:
-        return "model_fast"
-
-    # 路径 4B：深度通道
-    if intent in ["symptom_consult", "drug_consult"]:
+    # 低置信度升级：快速通道 → 深度通道
+    base_route = INTENT_ROUTE_MAP.get(intent, "model_fast")
+    if base_route == "model_fast" and confidence < LOW_CONFIDENCE_THRESHOLD:
         return "model_med"
 
-    # 多轮追问自动升级
-    if turn_count > 5:
+    # 多轮升级：超过 N 轮的快速通道对话升级到深度通道
+    if base_route == "model_fast" and turn_count >= ESCALATION_TURN_COUNT:
         return "model_med"
 
-    return "model_fast"
+    return base_route
+
+
+def resolve_intent(intent_result: IntentResult) -> str:
+    """提取主意图字符串"""
+    return intent_result.primary_intent.value
