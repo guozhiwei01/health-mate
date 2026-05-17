@@ -83,3 +83,32 @@ CREATE TABLE IF NOT EXISTS t_emergency_log (
     created_at       DATETIME DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_user (user_id)
 ) COMMENT '紧急事件日志';
+
+-- 会话管理
+CREATE TABLE IF NOT EXISTS t_conversation (
+    id              VARCHAR(64) PRIMARY KEY,
+    user_id         BIGINT NOT NULL,
+    title           VARCHAR(128)            COMMENT '会话标题（自动生成）',
+    last_intent     VARCHAR(32)             COMMENT '最近意图',
+    message_count   INT DEFAULT 0,
+    created_at      DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at      DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at      DATETIME NULL,
+    INDEX idx_user (user_id),
+    INDEX idx_updated (updated_at DESC)
+) COMMENT '会话管理';
+
+-- 健康提醒
+CREATE TABLE IF NOT EXISTS t_reminder (
+    id              BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id         BIGINT NOT NULL,
+    content         VARCHAR(256)            COMMENT '提醒内容',
+    remind_type     TINYINT DEFAULT 0       COMMENT '0用药 1复查 2运动 3饮食',
+    cron_expr       VARCHAR(64)             COMMENT 'cron 表达式（周期性）',
+    scheduled_at    DATETIME                COMMENT '下次触发时间',
+    is_active       TINYINT DEFAULT 1,
+    created_at      DATETIME DEFAULT CURRENT_TIMESTAMP,
+    deleted_at      DATETIME NULL,
+    INDEX idx_user (user_id),
+    INDEX idx_scheduled (scheduled_at)
+) COMMENT '健康提醒';
