@@ -262,6 +262,20 @@
         .intent-tag.agent { background: rgba(245, 158, 11, 0.15); color: var(--orange); }
         .intent-tag.report { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
 
+        .rag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 4px;
+            font-size: 10px;
+            color: var(--green);
+            font-weight: 500;
+        }
+        .rag-badge::before { content: '📚'; font-size: 10px; }
+
         .typing-indicator {
             display: flex;
             gap: 4px;
@@ -380,27 +394,27 @@
 <div class="chat-container" id="chatContainer">
     <div class="welcome-card" id="welcomeCard">
         <div class="welcome-icon">+</div>
-        <h2>HealthMate AI Health Assistant</h2>
-        <p>LangChain + LangGraph + 0.5B LoRA Intent Classifier</p>
+        <h2>HealthMate AI 健康助手</h2>
+        <p>LangChain + LangGraph + BGE-M3 RAG + 意图分类器</p>
         <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">
-            Streaming Response via SSE | LangSmith Tracing Enabled
+            SSE 流式输出 | Milvus 向量检索 | Elasticsearch BM25 | LangSmith 追踪
         </p>
         <div class="quick-actions">
             <button class="quick-btn" onclick="sendQuick(this)">
-                <div class="quick-label">Symptom Consult</div>
-                I have a headache for two days with nausea
+                <div class="quick-label">🩺 症状咨询</div>
+                我头疼两天了还有点恶心
             </button>
             <button class="quick-btn" onclick="sendQuick(this)">
-                <div class="quick-label">Drug Consult</div>
-                Can ibuprofen be taken with amoxicillin?
+                <div class="quick-label">💊 用药咨询</div>
+                布洛芬和阿莫西林能一起吃吗
             </button>
             <button class="quick-btn" onclick="sendQuick(this)">
-                <div class="quick-label">Health QA</div>
-                How much sleep do I need per day?
+                <div class="quick-label">❓ 健康问答</div>
+                血压多少算正常
             </button>
             <button class="quick-btn" onclick="sendQuick(this)">
-                <div class="quick-label">Task Command</div>
-                Remind me to take medicine at 8am tomorrow
+                <div class="quick-label">⏰ 任务指令</div>
+                提醒我明天早上8点吃降压药
             </button>
         </div>
     </div>
@@ -411,7 +425,7 @@
         <textarea
             class="input-field"
             id="userInput"
-            placeholder="Describe your symptoms or ask a health question..."
+            placeholder="描述你的症状或提问健康问题..."
             rows="1"
             onkeydown="handleKey(event)"
         ></textarea>
@@ -420,7 +434,7 @@
         </button>
     </div>
     <div class="input-hint">
-        0.5B LoRA classifier routes to fast/deep/report/agent/emergency paths
+        意图分类 → 知识检索 → RAG 增强推理 → 安全过滤 → 流式输出
     </div>
 </div>
 
@@ -492,8 +506,13 @@ function appendMessage(role, content, meta = null) {
         const metaDiv = document.createElement('div');
         metaDiv.className = 'msg-meta';
         const cls = getIntentClass(meta.model);
+        let ragHtml = '';
+        if (meta.rag_sources && meta.rag_sources.length > 0) {
+            ragHtml = `<span class="rag-badge">RAG ${meta.rag_chunks} chunks | ${meta.rag_sources.join(', ')}</span>`;
+        }
         metaDiv.innerHTML = `
             <span class="intent-tag ${cls}">${getIntentLabel(meta.intent, meta.model)}</span>
+            ${ragHtml}
             <span>${meta.provider || ''}</span>
         `;
         body.appendChild(metaDiv);
@@ -584,6 +603,13 @@ async function sendMessage() {
                     continue;
                 }
 
+                if (data.type === 'rag') {
+                    meta = meta || {};
+                    meta.rag_sources = data.sources;
+                    meta.rag_chunks = data.chunks;
+                    continue;
+                }
+
                 if (data.type === 'token') {
                     if (!botContent) {
                         removeTyping();
@@ -597,7 +623,7 @@ async function sendMessage() {
                 if (data.type === 'done' || data.type === 'error' || data.type === 'blocked') {
                     if (!botContent) {
                         removeTyping();
-                        const errMsg = data.content || 'Service error, please try again.';
+                        const errMsg = data.content || '服务异常，请重试';
                         appendMessage('bot', errMsg, meta);
                     }
                 }

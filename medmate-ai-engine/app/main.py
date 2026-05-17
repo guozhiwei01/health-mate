@@ -33,6 +33,24 @@ async def lifespan(app: FastAPI):
     from app.agent.health_graph import health_app
     app.state.health_app = health_app
 
+    # Initialize RAG knowledge base (BGE-M3 + Milvus + ES)
+    try:
+        from app.rag.knowledge_manager import knowledge_manager
+        knowledge_manager.init()
+
+        # Auto-ingest knowledge if empty
+        stats = knowledge_manager.get_stats()
+        if stats["milvus_chunks"] == 0:
+            import os
+            kb_dir = os.path.join(os.path.dirname(__file__), "..", "knowledge")
+            if os.path.isdir(kb_dir):
+                total = knowledge_manager.ingest_directory(kb_dir, category="medical_guidelines")
+                print(f"[RAG] Auto-ingested {total} chunks from knowledge/", flush=True)
+        else:
+            print(f"[RAG] Knowledge base ready: {stats}", flush=True)
+    except Exception as e:
+        print(f"[WARN] RAG init failed (non-fatal): {e}", flush=True)
+
     print(f"[START] {settings.app_name} | provider={settings.ai_provider} | model={settings.active_fast_model}")
     yield
     print(f"[STOP] {settings.app_name} shutting down")
@@ -158,15 +176,46 @@ async def chat_stream(user_input: str, session_id: str = "", turn_count: int = 0
             yield f"data: {json.dumps({'type': 'done'})}\n\n"
             return
 
-        # Step 3: Streaming LLM inference
+        # Step 3: RAG retrieval for deep channel
+        rag_context_str = ""
+        rag_sources = []
         if route_path == "model_med":
             provider = healthmate_med
+            try:
+                from app.rag.retriever import hybrid_retriever
+                from app.rag.reranker import bge_reranker
+                from app.rag.knowledge_manager import knowledge_manager
+
+                if knowledge_manager.is_ready:
+                    raw_results = hybrid_retriever.search(user_input, top_k=10)
+                    reranked = bge_reranker.rerank(user_input, raw_results)
+                    if reranked:
+                        rag_context_str = "\n---\n".join([r.content for r in reranked])
+                        rag_sources = list(set([r.source for r in reranked]))
+                        # Send RAG info to frontend
+                        rag_meta = {
+                            "type": "rag",
+                            "sources": rag_sources,
+                            "chunks": len(reranked),
+                        }
+                        yield f"data: {json.dumps(rag_meta, ensure_ascii=False)}\n\n"
+            except Exception as e:
+                print(f"[WARN] RAG retrieval failed: {e}", flush=True)
         else:
             provider = qwen_fast
 
+        # Step 4: Streaming LLM inference
         llm = provider.get_llm()
+        system_prompt = provider.get_system_prompt()
+        if rag_context_str:
+            system_prompt += (
+                "\n\n以下是从医学知识库中检索到的相关参考资料，请基于这些资料回答用户问题，"
+                "并在回答末尾注明参考来源：\n\n"
+                f"【参考资料】\n{rag_context_str}\n\n"
+                f"来源：{', '.join(rag_sources)}"
+            )
         messages = [
-            SystemMessage(content=provider.get_system_prompt()),
+            SystemMessage(content=system_prompt),
             HumanMessage(content=user_input),
         ]
 
@@ -180,7 +229,7 @@ async def chat_stream(user_input: str, session_id: str = "", turn_count: int = 0
         except Exception as e:
             yield f"data: {json.dumps({'type': 'error', 'content': str(e)}, ensure_ascii=False)}\n\n"
 
-        # Step 4: Safety check on full response
+        # Step 5: Safety check on full response
         safety = content_guard.check_output(full_response)
         if safety["is_blocked"]:
             yield f"data: {json.dumps({'type': 'blocked', 'content': 'This content has been blocked by safety filter.'}, ensure_ascii=False)}\n\n"
