@@ -1,0 +1,32 @@
+{
+  "intent_classification": {
+    "file_name": "intent_train.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system"
+    },
+    "tags": {
+      "role_tag": "from",
+      "content_tag": "value",
+      "user_tag": "human",
+      "assistant_tag": "gpt",
+      "system_tag": "system"
+    }
+  },
+  "intent_classification_val": {
+    "file_name": "intent_val.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations",
+      "system": "system"
+    },
+    "tags": {
+      "role_tag": "from",
+      "content_tag": "value",
+      "user_tag": "human",
+      "assistant_tag": "gpt",
+      "system_tag": "system"
+    }
+  }
+}

@@ -1,36 +1,40 @@
-# 意图分类器训练配置（LLaMA-Factory）
-# 基座：Qwen2.5-0.5B-Instruct
-# 数据：800-1000 条，7 类，ShareGPT 格式
-# 目标：准确率 ≥ 95%
-
+### model
 model_name_or_path: D:/models/Qwen2.5-0.5B-Instruct
+
+### method
 stage: sft
 do_train: true
 finetuning_type: lora
-
-# LoRA 配置
 lora_rank: 8
 lora_alpha: 16
 lora_target: q_proj,v_proj
 
-# 数据
-dataset_dir: training/data
+### dataset
+dataset_dir: D:/project/health-mate/medmate-ai-engine/training/data
 dataset: intent_classification
+eval_dataset: intent_classification_val
 template: qwen
+cutoff_len: 256
 
-# 训练参数
+### train
 per_device_train_batch_size: 4
 gradient_accumulation_steps: 4
 learning_rate: 5.0e-5
-num_train_epochs: 5
+num_train_epochs: 10
 lr_scheduler_type: cosine
 warmup_ratio: 0.1
-
-# 精度
 bf16: true
+gradient_checkpointing: true
 
-# 输出
-output_dir: saves/intent-classifier/lora/sft
+### eval
+val_size: 0.0
+per_device_eval_batch_size: 8
+eval_strategy: steps
+eval_steps: 50
+
+### output
+output_dir: D:/project/health-mate/medmate-ai-engine/training/saves/intent-classifier
 logging_steps: 10
-save_steps: 100
+save_steps: 50
 save_total_limit: 3
+report_to: none

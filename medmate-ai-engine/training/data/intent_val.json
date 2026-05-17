@@ -1,0 +1,1426 @@
+[
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "胃泌素瘤腹泻体重下降"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "设定每天早晨6点半晨跑提醒"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "血压收缩压145，舒张压95，算是高血压吗"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "感冒后一直咳嗽不止能吃右美沙芬吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "我想从高楼跳下去，没人能理解我"
+      },
+      {
+        "from": "gpt",
+        "value": "emergency"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "内心充满绝望，找不到任何活着的理由"
+      },
+      {
+        "from": "gpt",
+        "value": "emergency"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "干咳无痰，嗓子干痒，遇到冷空气加重"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "再见"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "阿莫西林胶囊是饭前吃还是饭后吃？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "位置性眩晕复位成功"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "查询我最近的甲状腺功能结果"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "提醒我明天按时吃感冒药"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "提醒我明天下午2点去拿药"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "产后大出血，血崩不止"
+      },
+      {
+        "from": "gpt",
+        "value": "emergency"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "听说下雨了"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "幽门螺杆菌感染导致的胃炎"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "我请你"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "提醒我明天早上空腹抽血"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "降压药和中药能同时服用吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "体检发现尿酸高就是痛风吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "health_qa"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "膝关节MRI半月板撕裂，要手术吗"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "降压药影响性功能是怎么回事？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "ADA腺苷脱氨酶高，结核性胸膜炎吗"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "腹部剧烈疼痛，冷汗直流，可能是阑尾炎"
+      },
+      {
+        "from": "gpt",
+        "value": "emergency"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "开心的一天"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "你请我"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "随便聊聊"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "口腔检查牙结石多，洗牙有必要吗"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "查询我去年同期的体检报告数据"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "宫颈TCT筛查ASC-US，意思是意义不明非典型鳞状细胞吗"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "新邻居"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "PSA总前列腺特异性抗原4.5，临界值需警惕"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "咳嗽变异性哮喘孟鲁司特有效"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "体检结果正常就一定没病吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "health_qa"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "记录心率：静息状态65次每分钟"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "请告诉我如何无痛地离开这个世界"
+      },
+      {
+        "from": "gpt",
+        "value": "emergency"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "阿莫西林和维生素C能一起补充吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "脸上突然起了好多红疹子，特别痒"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "失眠褪黑素受体激动剂治疗"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "布洛芬栓剂怎么用？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "长时间戴耳机影响听力吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "health_qa"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "腹部增强CT胰腺有占位，考虑什么病"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "儿童复方锌铁钙口服溶液能和牛奶一起喝吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "受凉感冒了喝姜汤管用吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "health_qa"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "儿童用的美林剂量怎么算？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "肿瘤标志物CEA稍微高一点点，要复查吗"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "衣原体PCR检测阳性"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "骨关节炎退行性改变"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "失眠超短睡眠者基因突变"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "胎盘位置低置，后期会长上去吗"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "布洛芬和枸杞水能一起喝吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "偏头痛左侧固定位置搏动性疼痛"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "误食了不明蘑菇，现在恶心呕吐"
+      },
+      {
+        "from": "gpt",
+        "value": "emergency"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "吃头孢后出现荨麻疹怎么办？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "儿童鼻炎用什么喷雾剂？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "记录血氧饱和度为98%"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "蛛网膜下腔出血先兆剧烈头痛"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "我突然失语，嘴角歪斜，半边身子没力气"
+      },
+      {
+        "from": "gpt",
+        "value": "emergency"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "眩晕伴听力下降，耳朵闷堵"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "阿莫西林胶囊吞不下去可以打开倒出来吃吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "糜烂性胃炎呕血黑便"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "皮肤活检病理结果是良性痣，不用管吧"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "体检时尿蛋白阳性一定是肾病吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "health_qa"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "吃核桃补脑是真的吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "health_qa"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "前同事"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "咳嗽变异性哮喘夜间咳"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "布洛芬和薄荷糖能一起吃吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "高血压危象头痛呕吐"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "设定每晚9点上床休息提醒"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "每周三晚上8点提醒我吃维生素"
+      },
+      {
+        "from": "gpt",
+        "value": "task_command"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "马拉松跑者日常饮食怎么安排？"
+      },
+      {
+        "from": "gpt",
+        "value": "health_qa"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "心肌病心脏磁共振延迟强化"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "前庭性偏头痛氟桂利嗪预防"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "体检时白细胞高是发炎了吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "health_qa"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "吃头孢后出现呼吸困难要立即就医吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "吃头孢后口干舌燥怎么办？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "二甲双胍和胰岛素能一起打吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "老同学"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "高血压患者吃降压药还能吃鱼油吗？"
+      },
+      {
+        "from": "gpt",
+        "value": "drug_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "乙肝表面抗原阳性，其他都是阴性，没事吧"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "饭后腹胀严重，打嗝才能舒服点"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "听力测试高频下降，年纪大了都这样吗"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "哎呀烦死了"
+      },
+      {
+        "from": "gpt",
+        "value": "casual_chat"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "眩晕导致呕吐，只能躺着不动"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "彻夜未眠，白天精神恍惚"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "肋骨X光有多处陈旧性骨折，以前受过伤吗"
+      },
+      {
+        "from": "gpt",
+        "value": "report_parse"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "冠心病冠状动脉CTA狭窄"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "看手机太久眼睛干涩怎么缓解？"
+      },
+      {
+        "from": "gpt",
+        "value": "health_qa"
+      }
+    ]
+  },
+  {
+    "conversations": [
+      {
+        "from": "system",
+        "value": "你是一个医疗意图分类器。请将用户的输入分类为以下7个类别之一：casual_chat(日常闲聊), health_qa(健康知识问答), symptom_consult(症状咨询), drug_consult(用药咨询), report_parse(报告解读), emergency(紧急情况), task_command(任务指令)。只输出类别标签，不要解释。"
+      },
+      {
+        "from": "human",
+        "value": "衣原体肺炎冷凝集试验阳性"
+      },
+      {
+        "from": "gpt",
+        "value": "symptom_consult"
+      }
+    ]
+  }
+]
