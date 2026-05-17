@@ -58,7 +58,7 @@ class Settings(BaseSettings):
     intent_lora_path: str = ""  # empty = use keyword classifier; set path to use LoRA model
     medical_model_path: str = "D:/models/Qwen2.5-7B"
     medical_lora_path: str = ""
-    embedding_model_path: str = "C:/Users/13203/.cache/huggingface/hub/models--BAAI--bge-m3"
+    embedding_model_path: str = "C:/Users/13203/.cache/huggingface/hub/models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181"
 
     # --- Redis ---
     redis_url: str = "redis://localhost:6379/0"
