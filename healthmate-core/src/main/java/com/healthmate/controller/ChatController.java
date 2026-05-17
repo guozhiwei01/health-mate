@@ -3,6 +3,7 @@ package com.healthmate.controller;
 import com.healthmate.client.AiEngineClient;
 import com.healthmate.entity.Conversation;
 import com.healthmate.entity.Message;
+import com.healthmate.security.Audited;
 import com.healthmate.service.ChatService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,7 @@ public class ChatController {
     /**
      * 同步对话
      */
+    @Audited(action = "CHAT", resource = "conversation")
     @PostMapping("/chat")
     public ResponseEntity<Map<String, Object>> chat(@RequestBody ChatRequest request) {
         long startTime = System.currentTimeMillis();
@@ -134,6 +136,7 @@ public class ChatController {
     /**
      * 会话列表
      */
+    @Audited(action = "LIST_CONVERSATIONS", resource = "conversation")
     @GetMapping("/conversations")
     public ResponseEntity<List<Conversation>> listConversations(
             @RequestParam Long userId) {
