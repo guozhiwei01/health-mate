@@ -1,29 +1,35 @@
 """
-HealthMate AI Engine - FastAPI 入口
-端口：8090
+HealthMate AI Engine - FastAPI Entry
+Port: 8090
 
-技术栈：FastAPI + LangChain + LangGraph + DashScope/Ollama
+Tech: FastAPI + LangChain + LangGraph + DashScope/Ollama + LangSmith
 """
 from dotenv import load_dotenv
-load_dotenv()  # 加载 .env 到 os.environ（LangSmith 需要）
+load_dotenv()  # Load .env to os.environ (LangSmith needs this)
 
+import asyncio
+import json
+import time
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
+
+from langchain_core.messages import SystemMessage, HumanMessage
 
 from app.config import settings
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """应用生命周期：启动时加载模型，关闭时释放资源"""
-    # 加载意图分类器
+    """App lifecycle: load models on startup, release on shutdown"""
+    # Load intent classifier (0.5B LoRA)
     from app.intent.classifier import intent_classifier
     intent_classifier.load()
 
-    # 构建 LangGraph 状态图
+    # Build LangGraph state graph
     from app.agent.health_graph import health_app
     app.state.health_app = health_app
 
@@ -34,12 +40,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title=settings.app_name,
-    description="自训医疗大模型驱动的 AI 健康助手引擎（LangChain + LangGraph）",
-    version="0.1.0",
+    description="AI Health Assistant Engine (LangChain + LangGraph)",
+    version="0.2.0",
     lifespan=lifespan,
 )
 
-# CORS 配置
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -49,11 +55,11 @@ app.add_middleware(
 )
 
 
-# ==================== 健康检查 ====================
+# ==================== Health Check ====================
 
-@app.get("/health", tags=["系统"])
+@app.get("/health", tags=["System"])
 async def health_check():
-    """健康检查"""
+    """Health check"""
     return {
         "status": "ok",
         "service": settings.app_name,
@@ -62,26 +68,25 @@ async def health_check():
     }
 
 
-# ==================== 核心接口 ====================
+# ==================== Core API ====================
 
-@app.post("/api/intent/classify", tags=["AI 核心"])
+@app.post("/api/intent/classify", tags=["AI Core"])
 async def classify_intent(text: str):
     """
-    意图分类（0.5B LoRA 模型）
-    输出 Top-2 意图 + 置信度
+    Intent classification (0.5B LoRA model)
+    Output: Top-2 intent + confidence
     """
     from app.intent.classifier import intent_classifier
     result = intent_classifier.classify(text)
     return result.model_dump()
 
 
-@app.post("/api/chat", tags=["AI 核心"])
+@app.post("/api/chat", tags=["AI Core"])
 async def chat(user_input: str, session_id: str = "", turn_count: int = 0):
     """
-    对话接口 - 走 LangGraph 完整链路
-    意图分类 → 模型路由 → 推理 → 安全检查 → 输出
+    Chat API - Full LangGraph pipeline
+    Intent classify -> Route -> Inference -> Safety check -> Output
     """
-    # 构建初始状态
     initial_state = {
         "user_input": user_input,
         "intent": "",
@@ -94,7 +99,6 @@ async def chat(user_input: str, session_id: str = "", turn_count: int = 0):
         "error": None,
     }
 
-    # 运行 LangGraph 状态图
     result = app.state.health_app.invoke(initial_state)
 
     return {
@@ -105,13 +109,97 @@ async def chat(user_input: str, session_id: str = "", turn_count: int = 0):
     }
 
 
-@app.post("/api/chat/quick", tags=["AI 核心"])
+@app.post("/api/chat/stream", tags=["AI Core"])
+async def chat_stream(user_input: str, session_id: str = "", turn_count: int = 0):
+    """
+    Streaming Chat API - SSE (Server-Sent Events)
+    Same pipeline as /api/chat, but streams the LLM response token by token
+    """
+    from app.intent.classifier import intent_classifier
+    from app.dispatcher import route
+    from app.models.qwen_fast import qwen_fast
+    from app.models.healthmate_med import healthmate_med
+    from app.security.content_guard import content_guard
+
+    # Step 1: Intent classification
+    intent_result = intent_classifier.classify(user_input)
+    route_path = route(intent_result, turn_count)
+    intent_str = intent_result.primary_intent.value
+
+    async def event_stream():
+        # Send metadata first
+        meta = {
+            "type": "meta",
+            "intent": intent_str,
+            "model": route_path,
+            "provider": settings.ai_provider,
+        }
+        yield f"data: {json.dumps(meta, ensure_ascii=False)}\n\n"
+
+        # Step 2: Handle non-streaming paths
+        if route_path == "emergency_handler":
+            msg = (
+                "!! EMERGENCY DETECTED !!\n"
+                "Please call 120 immediately or go to the nearest ER.\n"
+                "National psychological helpline: 400-161-9995\n"
+                "Your safety is the top priority."
+            )
+            yield f"data: {json.dumps({'type': 'token', 'content': msg}, ensure_ascii=False)}\n\n"
+            yield f"data: {json.dumps({'type': 'done'})}\n\n"
+            return
+
+        if route_path == "report_pipeline":
+            yield f"data: {json.dumps({'type': 'token', 'content': 'Report analysis pipeline is under development.'}, ensure_ascii=False)}\n\n"
+            yield f"data: {json.dumps({'type': 'done'})}\n\n"
+            return
+
+        if route_path == "agent_executor":
+            yield f"data: {json.dumps({'type': 'token', 'content': 'Agent tool execution is under development.'}, ensure_ascii=False)}\n\n"
+            yield f"data: {json.dumps({'type': 'done'})}\n\n"
+            return
+
+        # Step 3: Streaming LLM inference
+        if route_path == "model_med":
+            provider = healthmate_med
+        else:
+            provider = qwen_fast
+
+        llm = provider.get_llm()
+        messages = [
+            SystemMessage(content=provider.get_system_prompt()),
+            HumanMessage(content=user_input),
+        ]
+
+        full_response = ""
+        try:
+            for chunk in llm.stream(messages):
+                token = chunk.content
+                if token:
+                    full_response += token
+                    yield f"data: {json.dumps({'type': 'token', 'content': token}, ensure_ascii=False)}\n\n"
+        except Exception as e:
+            yield f"data: {json.dumps({'type': 'error', 'content': str(e)}, ensure_ascii=False)}\n\n"
+
+        # Step 4: Safety check on full response
+        safety = content_guard.check_output(full_response)
+        if safety["is_blocked"]:
+            yield f"data: {json.dumps({'type': 'blocked', 'content': 'This content has been blocked by safety filter.'}, ensure_ascii=False)}\n\n"
+
+        yield f"data: {json.dumps({'type': 'done'})}\n\n"
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
+
+
+@app.post("/api/chat/quick", tags=["AI Core"])
 async def chat_quick(user_input: str, mode: str = "fast"):
     """
-    快捷对话（跳过 LangGraph，直接调模型）
-    mode: "fast" 快速通道, "med" 深度通道
+    Quick chat (bypass LangGraph, direct model call)
+    mode: "fast" or "med"
     """
-    from langchain_core.messages import SystemMessage, HumanMessage
     from app.models.qwen_fast import qwen_fast
     from app.models.healthmate_med import healthmate_med
 
@@ -129,20 +217,27 @@ async def chat_quick(user_input: str, mode: str = "fast"):
     }
 
 
-@app.post("/internal/report/analyze", tags=["内部接口"])
+@app.post("/internal/report/analyze", tags=["Internal"])
 async def analyze_report(task_id: str, image_url: str):
     """
-    报告异步解读（Java Core 内部调用）
-    流程：Java Consumer -> HTTP POST 这里 -> 处理 -> 回调 Java
+    Report async analysis (called by Java Core internally)
+    Flow: Java Consumer -> HTTP POST here -> process -> callback Java
     """
     from app.pipelines.report_pipeline import report_pipeline
-    # 异步执行，不阻塞
-    import asyncio
     asyncio.create_task(report_pipeline(image_url, task_id))
     return {"status": "processing", "task_id": task_id}
 
 
-# ==================== 启动入口 ====================
+# ==================== Static Frontend ====================
+
+# Mount static files (frontend demo)
+import os
+static_dir = os.path.join(os.path.dirname(__file__), "..", "static")
+if os.path.exists(static_dir):
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+
+
+# ==================== Entry ====================
 
 if __name__ == "__main__":
     import uvicorn
