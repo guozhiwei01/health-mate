@@ -67,13 +67,21 @@ public class ReminderService {
     public void processDueReminders() {
         long windowEnd = System.currentTimeMillis() / 1000 + 60;
 
-        DefaultRedisScript<List> script = new DefaultRedisScript<>(LUA_ATOMIC_POP, List.class);
-        @SuppressWarnings("unchecked")
-        List<String> dueTasks = redisTemplate.execute(
-                script,
-                Collections.singletonList(REMINDER_QUEUE),
-                String.valueOf(windowEnd)
-        );
+        List<String> dueTasks;
+        try {
+            DefaultRedisScript<List> script = new DefaultRedisScript<>(LUA_ATOMIC_POP, List.class);
+            @SuppressWarnings("unchecked")
+            List<String> result = redisTemplate.execute(
+                    script,
+                    Collections.singletonList(REMINDER_QUEUE),
+                    String.valueOf(windowEnd)
+            );
+            dueTasks = result;
+        } catch (Exception e) {
+            // Redis 3.x 首次 EVALSHA 可能失败，静默跳过（下次会自动回退到 EVAL）
+            log.debug("[REMINDER] Lua script execution skipped: {}", e.getMessage());
+            return;
+        }
 
         if (dueTasks != null && !dueTasks.isEmpty()) {
             log.info("[REMINDER] Processing {} due reminders", dueTasks.size());
