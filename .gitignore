@@ -1,16 +1,8 @@
-# Compiled class file
+# === Java ===
 *.class
-
-# Log file
 *.log
-
-# BlueJ files
 *.ctxt
-
-# Mobile Tools for Java (J2ME)
 .mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
 *.nar
@@ -18,7 +10,39 @@
 *.zip
 *.tar.gz
 *.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+target/
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.so
+
+# === 环境 & 敏感文件 ===
+.env
+.env.*
+!.env.example
+
+# === 模型权重（太大不推） ===
+*.bin
+*.safetensors
+*.gguf
+saves/
+
+# === IDE ===
+.idea/
+.vscode/
+*.iml
+*.swp
+
+# === 测试临时文件 ===
+test_*.json
+
+# === OS ===
+.DS_Store
+Thumbs.db

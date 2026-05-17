@@ -1,0 +1,36 @@
+# 意图分类器训练配置（LLaMA-Factory）
+# 基座：Qwen2.5-0.5B-Instruct
+# 数据：800-1000 条，7 类，ShareGPT 格式
+# 目标：准确率 ≥ 95%
+
+model_name_or_path: D:/models/Qwen2.5-0.5B-Instruct
+stage: sft
+do_train: true
+finetuning_type: lora
+
+# LoRA 配置
+lora_rank: 8
+lora_alpha: 16
+lora_target: q_proj,v_proj
+
+# 数据
+dataset_dir: training/data
+dataset: intent_classification
+template: qwen
+
+# 训练参数
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 5.0e-5
+num_train_epochs: 5
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+
+# 精度
+bf16: true
+
+# 输出
+output_dir: saves/intent-classifier/lora/sft
+logging_steps: 10
+save_steps: 100
+save_total_limit: 3

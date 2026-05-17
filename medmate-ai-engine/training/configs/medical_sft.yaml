@@ -1,0 +1,44 @@
+# 医疗模型 QLoRA 训练配置（LLaMA-Factory）
+# 基座：Qwen2.5-7B（本地 QLoRA 4-bit）
+# 数据：4000 条（问诊/报告/用药/安全兜底/慢病）
+# 显存：RTX 4070 Laptop 8GB
+
+model_name_or_path: D:/models/Qwen2.5-7B
+stage: sft
+do_train: true
+finetuning_type: lora
+
+# LoRA 配置
+lora_rank: 8
+lora_alpha: 16
+lora_target: q_proj,v_proj,k_proj,o_proj
+
+# QLoRA 4-bit 量化（省显存）
+quantization_bit: 4
+
+# 数据
+dataset_dir: training/data
+dataset: medical_sft
+template: qwen
+
+# 训练参数（适配 8GB 显存）
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+learning_rate: 5.0e-5
+num_train_epochs: 3
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+
+# 省显存关键配置
+gradient_checkpointing: true
+cutoff_len: 512
+flash_attn: fa2
+
+# 精度
+bf16: true
+
+# 输出
+output_dir: saves/HealthMate-Med-7B/lora/sft
+logging_steps: 10
+save_steps: 200
+save_total_limit: 3
