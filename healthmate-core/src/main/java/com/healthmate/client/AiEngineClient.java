@@ -64,6 +64,22 @@ public class AiEngineClient {
     }
 
     /**
+     * 报告解读（异步 HTTP 转发给 Python）
+     * MQ Consumer 调用此方法
+     */
+    public void analyzeReport(String taskId, String imageUrl) {
+        webClient.post()
+                .uri(uriBuilder -> uriBuilder.path("/internal/report/analyze")
+                        .queryParam("task_id", taskId)
+                        .queryParam("image_url", imageUrl)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+        log.info("[AI-CLIENT] Report analyze sent: taskId={}", taskId);
+    }
+
+    /**
      * 健康检查
      */
     public boolean healthCheck() {
