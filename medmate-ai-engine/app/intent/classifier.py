@@ -96,20 +96,32 @@ class IntentClassifier:
             )
 
         new_tokens = outputs[0][inputs["input_ids"].shape[1]:]
-        result = self.tokenizer.decode(new_tokens, skip_special_tokens=True).strip().lower()
+        raw_result = self.tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
+        result = raw_result.lower().strip()
 
         elapsed_ms = (time.perf_counter() - start) * 1000
 
-        # 从结果中提取有效意图
+        # Debug log
+        print(f"  [INTENT] input='{text[:30]}' raw='{raw_result}' ({elapsed_ms:.0f}ms)", flush=True)
+
+        # 精确匹配（优先）
         primary_intent = IntentType.HEALTH_QA  # 默认
-        for intent_value in VALID_INTENTS:
-            if intent_value in result:
-                primary_intent = IntentType(intent_value)
-                break
+        if result in VALID_INTENTS:
+            primary_intent = IntentType(result)
+        else:
+            # 包含匹配（按优先级排序，避免 set 遍历随机性）
+            priority_order = [
+                "emergency", "symptom_consult", "drug_consult",
+                "report_parse", "task_command", "casual_chat", "health_qa",
+            ]
+            for intent_value in priority_order:
+                if intent_value in result:
+                    primary_intent = IntentType(intent_value)
+                    break
 
         return IntentResult(
             primary_intent=primary_intent,
-            primary_confidence=0.95,  # LoRA 模型置信度高
+            primary_confidence=0.95,
             secondary_intent=IntentType.HEALTH_QA,
             secondary_confidence=0.03,
             latency_ms=elapsed_ms,

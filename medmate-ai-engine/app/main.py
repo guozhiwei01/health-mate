@@ -230,11 +230,17 @@ async def analyze_report(task_id: str, image_url: str):
 
 # ==================== Static Frontend ====================
 
-# Mount static files (frontend demo)
 import os
+from fastapi.responses import FileResponse
+
 static_dir = os.path.join(os.path.dirname(__file__), "..", "static")
-if os.path.exists(static_dir):
-    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+
+
+@app.get("/", tags=["Frontend"], include_in_schema=False)
+async def serve_frontend():
+    """Serve the demo chat UI"""
+    index_path = os.path.join(static_dir, "index.html")
+    return FileResponse(index_path, media_type="text/html")
 
 
 # ==================== Entry ====================
