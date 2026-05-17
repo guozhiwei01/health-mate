@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: healthmate-core
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: public
 
   # MySQL
   datasource:

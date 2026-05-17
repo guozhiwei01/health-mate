@@ -1,0 +1,56 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: healthmate-gateway
+  cloud:
+    # Nacos 服务发现
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: public
+
+    # Spring Cloud Gateway 路由
+    gateway:
+      routes:
+        # healthmate-core 路由（通过 Nacos 负载均衡）
+        - id: core-service
+          uri: lb://healthmate-core
+          predicates:
+            - Path=/api/chat/**,/api/conversations/**,/api/report/**,/api/reminders/**
+          filters:
+            - StripPrefix=0
+
+        # Python AI Engine 直连（非 Java 服务，不走 Nacos）
+        - id: ai-engine
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/intent/**,/api/ai/**
+          filters:
+            - StripPrefix=0
+
+      # 全局 CORS
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
+# JWT
+jwt:
+  secret: healthmate-jwt-secret-key-for-signing-tokens-2026
+  expire-hours: 24
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+
+logging:
+  level:
+    com.healthmate.gateway: DEBUG
+    org.springframework.cloud.gateway: INFO
