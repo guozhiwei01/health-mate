@@ -1,0 +1,98 @@
+# HealthMate 全家桶 Docker Compose
+# 一键启动所有中间件（MySQL/Redis 需本地安装或另行启动）
+#
+# 启动：docker compose up -d
+# 停止：docker compose down
+
+services:
+
+  # ==================== 向量数据库 ====================
+  milvus-etcd:
+    image: quay.io/coreos/etcd:v3.5.18
+    container_name: milvus-etcd
+    environment:
+      ETCD_AUTO_COMPACTION_MODE: revision
+      ETCD_AUTO_COMPACTION_RETENTION: "1000"
+      ETCD_QUOTA_BACKEND_BYTES: "4294967296"
+      ALLOW_NONE_AUTHENTICATION: "yes"
+    command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
+    restart: unless-stopped
+
+  milvus-minio:
+    image: minio/minio:RELEASE.2024-04-18T19-09-19Z
+    container_name: milvus-minio
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    command: minio server /minio_data --console-address ":9001"
+    restart: unless-stopped
+
+  milvus:
+    image: milvusdb/milvus:v2.5.6
+    container_name: milvus-standalone
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+    environment:
+      ETCD_ENDPOINTS: milvus-etcd:2379
+      MINIO_ADDRESS: milvus-minio:9000
+    depends_on:
+      - milvus-etcd
+      - milvus-minio
+    restart: unless-stopped
+
+  # ==================== 全文检索 ====================
+  elasticsearch:
+    image: elasticsearch:8.15.0
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    restart: unless-stopped
+
+  # ==================== 消息队列 ====================
+  rmq-namesrv:
+    image: apache/rocketmq:5.2.0
+    container_name: rmqnamesrv
+    ports:
+      - "9876:9876"
+    environment:
+      JAVA_OPT_EXT: "-Xms256m -Xmx256m"
+    command: sh mqnamesrv
+    restart: unless-stopped
+
+  rmq-broker:
+    image: apache/rocketmq:5.2.0
+    container_name: rmqbroker
+    ports:
+      - "10911:10911"
+    environment:
+      NAMESRV_ADDR: rmq-namesrv:9876
+      JAVA_OPT_EXT: "-Xms512m -Xmx512m"
+    command: sh mqbroker -n rmq-namesrv:9876 --enable-proxy
+    depends_on:
+      - rmq-namesrv
+    restart: unless-stopped
+
+  # ==================== 可观测 ====================
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: hm-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./deploy/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:10.4.1
+    container_name: hm-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: healthmate
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    restart: unless-stopped
